@@ -1,26 +1,26 @@
-# ARQ.LAB — Arquitectura desacoplada y microservicios
+# ARQ.LAB — Arquitectura monolítica
 
-Guía educativa e interactiva en español sobre arquitectura desacoplada para estudiantes de Ingeniería de Software. Incluye un diagrama seleccionable, comparación entre monolitos y microservicios, ventajas y costes, ejemplos y un cuestionario de 10 preguntas con revisión explicada.
+Guía educativa e interactiva en español para estudiantes de Ingeniería de Software. Incluye explicación por módulos, diagrama de una tienda, características, ventajas y desventajas, ejemplos, comparación con microservicios, reproductor de video configurable y cuestionario de 10 preguntas con resumen y revisión explicada.
 
 ## Ejecutar
 
-Abre `index.html` en un navegador moderno. No se necesitan dependencias ni proceso de compilación. Para servirla localmente también puedes ejecutar:
+Abre `index.html` en un navegador moderno. No requiere dependencias ni compilación. Para servir el sitio localmente:
 
 ```sh
 python3 -m http.server 8000
 ```
 
-Después visita `http://localhost:8000`.
+Después visita <http://localhost:8000>.
 
 ## Configurar el video
 
-En la parte superior de `script.js`, configura **una** de estas opciones en `VIDEO_CONFIG`:
+Edita `VIDEO_CONFIG`, al inicio de `script.js`, y utiliza una de estas opciones:
 
 ```js
 const VIDEO_CONFIG = {
-  mp4Path: "videos/arquitectura-desacoplada.mp4",
+  mp4Path: "video/arquitectura-monolitica.mp4",
   youtubeUrl: "",
 };
 ```
 
-Para YouTube, deja `mp4Path` vacío y asigna una URL válida de YouTube a `youtubeUrl` (por ejemplo, una URL `watch?v=...`, `youtu.be/...` o `/embed/...`). Si ambas opciones tienen valor, el MP4 tiene prioridad. Sin una fuente configurada se muestra un espacio preparado, no un video ficticio. El MP4 utiliza los controles nativos del navegador y muestra la duración al cargar sus metadatos; YouTube incluye sus propios controles y duración.
+Para un video local, copia el archivo MP4 dentro de la carpeta `video/` y asigna su ruta relativa a `mp4Path`. Para YouTube, deja `mp4Path` vacío y coloca una URL válida de YouTube en `youtubeUrl`. Si ambas opciones tienen valor, el MP4 tiene prioridad. Sin una fuente configurada se muestra un espacio preparado, no un video ficticio. El MP4 utiliza controles nativos y muestra su duración al cargar metadatos; YouTube incorpora sus propios controles.

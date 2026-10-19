@@ -1,154 +1,158 @@
-// Add either a local MP4 path or a YouTube URL when the lesson video is available.
+// Configura una sola fuente cuando el video esté disponible. MP4 tiene prioridad.
 const VIDEO_CONFIG = {
   mp4Path: "",
   youtubeUrl: "",
 };
 
+const moduleDetails = {
+  users: {
+    title: "Módulo de usuarios",
+    description: "Gestiona perfiles, direcciones y autenticación como parte de la aplicación de la tienda. Puede utilizar las reglas internas y la capa de datos compartida.",
+  },
+  products: {
+    title: "Módulo de productos",
+    description: "Mantiene el catálogo, los precios y las existencias. Al crear una compra, otros módulos pueden consultar internamente la disponibilidad.",
+  },
+  orders: {
+    title: "Módulo de pedidos",
+    description: "Coordina el carrito y el ciclo de vida de cada orden. Reúne productos, datos del usuario y el resultado del pago dentro de la aplicación.",
+  },
+  payments: {
+    title: "Módulo de pagos",
+    description: "Aplica las reglas para registrar cobros y reembolsos. En un sistema real, los datos sensibles deben tratarse con controles de seguridad adecuados.",
+  },
+  business: {
+    title: "Capa de lógica de negocio",
+    description: "Contiene las reglas del sistema y coordina acciones entre módulos, como comprobar existencias antes de confirmar un pedido.",
+  },
+  data: {
+    title: "Capa de acceso a datos",
+    description: "Centraliza las operaciones para consultar y guardar información. Los módulos solicitan datos a esta capa en vez de comunicarse con la base por su cuenta.",
+  },
+};
+
 const questions = [
   {
     level: "BÁSICA · CONCEPTOS",
-    question: "¿Cuál es el objetivo principal de una arquitectura desacoplada?",
+    question: "¿Qué es la arquitectura monolítica?",
     options: [
-      "Eliminar toda comunicación entre las partes del sistema.",
-      "Reducir dependencias para que los componentes puedan evolucionar con menor impacto.",
-      "Guardar todos los datos en una única base de datos compartida.",
-      "Usar la misma tecnología en cada módulo.",
+      "Un conjunto de servicios que se despliegan siempre por separado.",
+      "Una aplicación que integra sus principales componentes y suele desplegarse como una unidad.",
+      "Una base de datos sin interfaz ni lógica de negocio.",
+      "Un programa que no puede dividir su código en módulos.",
     ],
     answer: 1,
-    explanation: "Desacoplar busca limitar cuánto conoce y depende un componente de los demás, para que los cambios sean más localizados. Los componentes todavía necesitan colaborar mediante interfaces.",
+    explanation: "Un monolito reúne las funcionalidades principales en una misma aplicación, que habitualmente se construye y despliega como una unidad. Puede tener una organización modular interna.",
   },
   {
-    level: "BÁSICA · CONCEPTOS",
-    question: "¿Qué describe mejor a un microservicio?",
+    level: "BÁSICA · ORGANIZACIÓN",
+    question: "¿Cómo se organizan los componentes en una aplicación monolítica bien estructurada?",
     options: [
-      "Una función pequeña que siempre se ejecuta dentro de una aplicación monolítica.",
-      "Un servidor dedicado a almacenar todos los datos de la aplicación.",
-      "Un servicio autónomo enfocado en una capacidad de negocio y comunicable mediante contratos.",
-      "Una copia completa de la aplicación para cada usuario.",
-    ],
-    answer: 2,
-    explanation: "Un microservicio se organiza alrededor de una responsabilidad de negocio, encapsula su implementación y ofrece interfaces para colaborar con otros servicios.",
-  },
-  {
-    level: "BÁSICA · CONCEPTOS",
-    question: "¿Cuál es una diferencia habitual entre una aplicación monolítica y una basada en microservicios?",
-    options: [
-      "El monolito suele desplegarse como una unidad; los servicios pueden desplegarse por separado.",
-      "El monolito no puede tener módulos ni responsabilidades diferenciadas.",
-      "Los microservicios no necesitan comunicarse entre sí.",
-      "Una arquitectura monolítica siempre requiere más infraestructura.",
+      "En módulos con responsabilidades distintas dentro de la misma aplicación.",
+      "En servidores independientes obligatoriamente.",
+      "En una única función sin separar responsabilidades.",
+      "En bases de datos que no pueden compartir información.",
     ],
     answer: 0,
-    explanation: "En un monolito modular puede haber límites internos claros, pero la aplicación suele publicarse como una sola unidad. Los microservicios permiten despliegues separados, a cambio de más trabajo distribuido.",
+    explanation: "Un monolito puede organizarse internamente en módulos, por ejemplo usuarios, productos y pedidos. La modularidad del código no implica que cada módulo se despliegue como servicio independiente.",
   },
   {
-    level: "INTERMEDIA · COMUNICACIÓN",
-    question: "¿Qué papel cumple una API en la comunicación entre servicios?",
+    level: "BÁSICA · DESPLIEGUE",
+    question: "¿Qué significa desplegar una aplicación monolítica como una unidad?",
     options: [
-      "Reemplaza toda necesidad de validar los datos recibidos.",
-      "Permite que un servicio invoque directamente las funciones internas de otro.",
-      "Define una interfaz y un contrato para solicitar o intercambiar información.",
-      "Garantiza que la comunicación nunca falle.",
+      "Publicar solo el módulo que recibió cambios y dejar el resto fuera del sistema.",
+      "Instalar una parte distinta en cada dispositivo de usuario.",
+      "Publicar una versión que contiene la aplicación completa, aunque el cambio afecte a un solo módulo.",
+      "No volver a publicar el programa después de la primera entrega.",
     ],
     answer: 2,
-    explanation: "Una API define cómo pedir una operación o intercambiar datos sin depender de los detalles internos del otro servicio. No elimina la necesidad de validar ni de gestionar errores de red.",
+    explanation: "En la configuración habitual, el artefacto de despliegue contiene el conjunto de la aplicación. Por eso, una modificación localizada puede requerir publicar una nueva versión completa.",
   },
   {
-    level: "INTERMEDIA · DESPLIEGUE",
-    question: "¿Qué significa que dos microservicios puedan desplegarse de forma independiente?",
+    level: "BÁSICA · VENTAJAS",
+    question: "¿Cuál es una ventaja frecuente de comenzar un proyecto pequeño con un monolito?",
     options: [
-      "Que comparten obligatoriamente el mismo ciclo de publicación.",
-      "Que un servicio puede actualizarse sin publicar todos los demás, si sus contratos siguen siendo compatibles.",
-      "Que ninguno necesita pruebas de integración.",
-      "Que cada servicio debe utilizar un lenguaje de programación distinto.",
+      "Cada módulo se escala de forma independiente desde el primer día.",
+      "Se evitan todas las pruebas y revisiones.",
+      "El sistema nunca necesitará cambios de arquitectura.",
+      "Hay menos piezas operativas y es sencillo ejecutar la aplicación en un mismo entorno.",
+    ],
+    answer: 3,
+    explanation: "Para un sistema pequeño, un proyecto y un despliegue comunes suelen ser más simples de desarrollar y operar que una solución distribuida equivalente.",
+  },
+  {
+    level: "INTERMEDIA · MANTENIMIENTO",
+    question: "¿Qué posible dificultad puede aparecer si una aplicación monolítica crece sin una buena organización?",
+    options: [
+      "Los módulos dejan de poder compartir recursos.",
+      "El alto acoplamiento puede hacer que los cambios sean difíciles de mantener y probar.",
+      "La aplicación se transforma automáticamente en microservicios.",
+      "Cada función comienza a necesitar una llamada de red.",
     ],
     answer: 1,
-    explanation: "El despliegue independiente permite publicar un servicio sin volver a desplegar todo el sistema, siempre que se mantenga la compatibilidad de las interfaces y dependencias.",
+    explanation: "Sin límites internos claros, los módulos pueden depender demasiado unos de otros. Entonces un cambio puede producir efectos inesperados en otras zonas y requerir pruebas más amplias.",
   },
   {
     level: "INTERMEDIA · ESCALABILIDAD",
-    question: "En una tienda, durante una campaña aumentan mucho las consultas al catálogo, pero no los pagos. ¿Qué ventaja puede ofrecer separar esos servicios?",
+    question: "¿Cómo suele escalarse una aplicación monolítica tradicional?",
     options: [
-      "Escalar solo el servicio de catálogo según su carga.",
-      "Evitar por completo la necesidad de monitorear el sistema.",
-      "Asegurar que ningún servicio experimente fallos.",
-      "Duplicar la base de datos de pagos para atender las consultas del catálogo.",
+      "Se agregan recursos o instancias a la aplicación completa, aunque una función consuma más que las demás.",
+      "Se escala siempre únicamente la base de datos.",
+      "Se despliega un servidor nuevo por cada función interna.",
+      "No puede escalarse de ninguna manera.",
     ],
     answer: 0,
-    explanation: "Con servicios separados se puede asignar capacidad adicional al componente con mayor demanda, sin escalar necesariamente todos los demás.",
+    explanation: "En su configuración habitual, el monolito se escala como unidad. Es posible optimizar o separar componentes, pero el escalado selectivo por módulo no suele ser su forma de operación estándar.",
   },
   {
-    level: "INTERMEDIA · RESPONSABILIDADES",
-    question: "¿Cuál sería un límite de responsabilidad razonable para un servicio de notificaciones?",
+    level: "INTERMEDIA · DISEÑO",
+    question: "¿Pueden existir módulos bien organizados dentro de un monolito?",
     options: [
-      "Administrar perfiles, pagos, pedidos y el inventario completo.",
-      "Enviar avisos por canales acordados cuando recibe solicitudes o eventos relevantes.",
-      "Modificar directamente las tablas internas de todos los servicios.",
-      "Decidir la autenticación y el precio de cada producto.",
-    ],
-    answer: 1,
-    explanation: "Una responsabilidad delimitada mantiene el servicio centrado. Notificaciones puede encargarse del envío de mensajes y responder a eventos, sin asumir las reglas internas de pedidos o pagos.",
-  },
-  {
-    level: "INTERMEDIA · TRADE-OFFS",
-    question: "¿Qué afirmación resume mejor el balance de los microservicios?",
-    options: [
-      "Siempre reducen los costes porque cada equipo elige su tecnología.",
-      "Eliminan los fallos, ya que los servicios están aislados.",
-      "Ofrecen autonomía y escalado selectivo, pero aumentan la complejidad operativa y distribuida.",
-      "Son la opción recomendada para cualquier aplicación pequeña.",
+      "No; la palabra monolito significa que todo el código debe estar mezclado.",
+      "Sí, pero solo si cada módulo usa un lenguaje distinto.",
+      "Sí. Puede haber módulos con responsabilidades claras aunque se desplieguen juntos.",
+      "No; para usar módulos es obligatorio adoptar microservicios.",
     ],
     answer: 2,
-    explanation: "La autonomía, el escalado selectivo y los cambios localizados son ventajas potenciales; infraestructura, observabilidad, seguridad y coordinación entre servicios agregan costes.",
+    explanation: "Un monolito modular separa responsabilidades dentro del código. La diferencia principal es que los módulos siguen formando parte de una aplicación desplegable como conjunto.",
   },
   {
-    level: "APLICADA · RESILIENCIA",
-    question: "El servicio de pagos no responde temporalmente al crear un pedido. ¿Qué diseño ayuda a manejar este fallo?",
+    level: "APLICADA · DESPLIEGUE",
+    question: "El equipo cambia la pantalla del catálogo y la aplicación exige desplegarse de nuevo completa. ¿Qué consecuencia práctica tiene?",
     options: [
-      "Esperar sin límite hasta que la conexión se recupere.",
-      "Reintentar continuamente y en paralelo desde todos los servicios.",
-      "Usar tiempos de espera acotados, reintentos prudentes y un estado de pedido que permita recuperarse.",
-      "Ignorar el error y marcar el pago como exitoso.",
+      "Los módulos se desplegarán automáticamente en distintos servidores.",
+      "El cambio no puede llegar a producción.",
+      "La base de datos se convertirá en una API.",
+      "La publicación puede requerir validar y liberar el sistema completo, aunque el cambio sea pequeño.",
     ],
-    answer: 2,
-    explanation: "Los fallos de red son posibles. Límites de tiempo, reintentos limitados con espera y estados explícitos permiten evitar esperas infinitas y recuperar el flujo sin fingir éxito.",
+    answer: 3,
+    explanation: "Al desplegarse como unidad, una modificación en un módulo suele producir una versión nueva del conjunto. Las pruebas y el proceso de publicación deben considerar la aplicación completa.",
   },
   {
-    level: "APLICADA · DECISIÓN",
-    question: "¿En cuál escenario podría justificarse evaluar microservicios, sin asumir que sean siempre la mejor opción?",
+    level: "APLICADA · ELECCIÓN",
+    question: "¿Qué tipo de proyecto podría beneficiarse de comenzar con una arquitectura monolítica?",
     options: [
-      "Un prototipo personal con pocas funciones y un único desarrollador.",
-      "Un producto con capacidades bien delimitadas, equipos autónomos y necesidad real de escalar o desplegar partes a ritmos distintos.",
-      "Cualquier sistema que todavía no conoce sus requisitos.",
-      "Una aplicación que necesita evitar completamente las llamadas de red.",
+      "Un producto que exige que decenas de equipos desplieguen cada capacidad por separado desde el comienzo.",
+      "Un sistema pequeño o mediano, con equipo reducido y necesidades que aún están evolucionando.",
+      "Cualquier aplicación, sin importar sus requisitos.",
+      "Un sistema que tiene prohibido ejecutarse como una sola aplicación.",
     ],
     answer: 1,
-    explanation: "Límites de dominio claros, equipos preparados y necesidades concretas de despliegue o escalado pueden justificar la inversión. Para un producto pequeño o incierto, un monolito modular suele ser más sencillo.",
+    explanation: "Un monolito puede ayudar a avanzar con menos complejidad inicial en un producto pequeño o mediano. La decisión debe revisarse si aparecen necesidades concretas que lo justifiquen.",
+  },
+  {
+    level: "APLICADA · IDENTIFICACIÓN",
+    question: "Una biblioteca administra usuarios, libros y préstamos dentro de una aplicación que se publica como un conjunto. ¿Qué arquitectura podría estar utilizando?",
+    options: [
+      "Una arquitectura monolítica, posiblemente organizada en módulos.",
+      "Microservicios desplegados siempre en unidades independientes.",
+      "Una arquitectura sin persistencia de datos.",
+      "Un sistema sin componentes de software.",
+    ],
+    answer: 0,
+    explanation: "Las funcionalidades integradas en una aplicación que se despliega como conjunto corresponden a un diseño monolítico. Sus áreas todavía pueden estar separadas en módulos internos.",
   },
 ];
-
-const serviceDetails = {
-  users: {
-    title: "Servicio de usuarios",
-    description: "Gestiona perfiles, direcciones y autenticación. Expone operaciones para que otros servicios consulten la identidad del cliente sin acceder a sus datos internos.",
-  },
-  products: {
-    title: "Servicio de productos",
-    description: "Mantiene el catálogo, precios e inventario. Puede escalarse para soportar picos de búsqueda y publicar cambios de producto sin desplegar pagos.",
-  },
-  orders: {
-    title: "Servicio de pedidos",
-    description: "Coordina el carrito y el ciclo de vida de una orden. Solicita la información necesaria a otros servicios y registra los estados del pedido.",
-  },
-  payments: {
-    title: "Servicio de pagos",
-    description: "Procesa cobros y reembolsos mediante una integración segura. Debe tratar los errores de red con cuidado y evitar exponer datos sensibles.",
-  },
-  notifications: {
-    title: "Servicio de notificaciones",
-    description: "Envía confirmaciones y avisos por los canales configurados. Puede reaccionar a eventos de pedidos sin bloquear el flujo principal de compra.",
-  },
-};
 
 const menuToggle = document.querySelector(".menu-toggle");
 const mainNav = document.querySelector("#main-nav");
@@ -168,18 +172,18 @@ mainNav.querySelectorAll("a").forEach((link) => {
   });
 });
 
-document.querySelectorAll(".service-card").forEach((card) => {
-  card.addEventListener("click", () => {
-    const detail = serviceDetails[card.dataset.service];
+document.querySelectorAll("[data-module]").forEach((component) => {
+  component.addEventListener("click", () => {
+    const detail = moduleDetails[component.dataset.module];
     if (!detail) return;
 
-    document.querySelectorAll(".service-card").forEach((serviceCard) => {
-      const isSelected = serviceCard === card;
-      serviceCard.classList.toggle("selected", isSelected);
-      serviceCard.setAttribute("aria-pressed", String(isSelected));
+    document.querySelectorAll("[data-module]").forEach((item) => {
+      const isSelected = item === component;
+      item.classList.toggle("selected", isSelected);
+      item.setAttribute("aria-pressed", String(isSelected));
     });
-    document.querySelector("#service-title").textContent = detail.title;
-    document.querySelector("#service-description").textContent = detail.description;
+    document.querySelector("#module-title").textContent = detail.title;
+    document.querySelector("#module-description").textContent = detail.description;
   });
 });
 
@@ -198,8 +202,8 @@ function formatDuration(seconds) {
 function getYouTubeEmbedUrl(value) {
   try {
     const url = new URL(value);
-    const isYouTubeHost = ["youtube.com", "www.youtube.com", "m.youtube.com", "youtube-nocookie.com", "www.youtube-nocookie.com", "youtu.be"].includes(url.hostname);
-    if (!isYouTubeHost) return null;
+    const allowedHosts = ["youtube.com", "www.youtube.com", "m.youtube.com", "youtube-nocookie.com", "www.youtube-nocookie.com", "youtu.be"];
+    if (!allowedHosts.includes(url.hostname)) return null;
 
     let videoId = "";
     if (url.hostname === "youtu.be") videoId = url.pathname.slice(1);
@@ -251,6 +255,7 @@ const previousButton = document.querySelector("#quiz-prev");
 const nextButton = document.querySelector("#quiz-next");
 const finishButton = document.querySelector("#quiz-finish");
 const quizStage = document.querySelector("#quiz-stage");
+const quizSummary = document.querySelector("#quiz-summary");
 const quizResults = document.querySelector("#quiz-results");
 const quizFootnote = document.querySelector(".quiz-footnote");
 let currentQuestion = 0;
@@ -311,9 +316,75 @@ nextButton.addEventListener("click", () => {
   renderQuestion();
 });
 
+function showQuizSummary() {
+  const answeredCount = selectedAnswers.filter((answer) => answer !== null).length;
+  const pendingQuestions = selectedAnswers
+    .map((answer, index) => answer === null ? index : -1)
+    .filter((index) => index !== -1);
+  const summaryTitle = document.createElement("h3");
+  summaryTitle.className = "summary-title";
+  summaryTitle.textContent = "Resumen del cuestionario";
+  const summaryText = document.createElement("p");
+  summaryText.className = "summary-copy";
+  summaryText.textContent = `Has respondido ${answeredCount} de ${questions.length} preguntas; quedan ${pendingQuestions.length} pendientes.`;
+  const list = document.createElement("ol");
+  list.className = "summary-list";
+
+  questions.forEach((question, index) => {
+    const item = document.createElement("li");
+    item.className = selectedAnswers[index] === null ? "is-pending" : "is-answered";
+    const status = selectedAnswers[index] === null ? "Pendiente" : "Respondida";
+    item.textContent = `${index + 1}. ${status} — ${question.question}`;
+    list.append(item);
+  });
+
+  const feedbackMessage = document.createElement("p");
+  feedbackMessage.className = "summary-feedback";
+  feedbackMessage.setAttribute("aria-live", "polite");
+  const actions = document.createElement("div");
+  actions.className = "results-actions";
+  const backButton = document.createElement("button");
+  backButton.className = "button button-quiet";
+  backButton.type = "button";
+  backButton.textContent = pendingQuestions.length ? "Responder pendientes" : "Volver a revisar";
+  backButton.addEventListener("click", () => {
+    quizSummary.hidden = true;
+    quizStage.hidden = false;
+    if (pendingQuestions.length) currentQuestion = pendingQuestions[0];
+    renderQuestion();
+    questionTitle.focus();
+  });
+
+  const calculateButton = document.createElement("button");
+  calculateButton.className = "button button-primary";
+  calculateButton.type = "button";
+  calculateButton.textContent = "Calcular resultado";
+  calculateButton.disabled = pendingQuestions.length > 0;
+  calculateButton.addEventListener("click", renderResults);
+  actions.append(backButton, calculateButton);
+  quizSummary.replaceChildren(summaryTitle, summaryText, list, feedbackMessage, actions);
+  quizSummary.hidden = false;
+  quizStage.hidden = true;
+  feedbackMessage.textContent = pendingQuestions.length
+    ? `Faltan ${pendingQuestions.length} respuestas. Complétalas antes de calcular la nota.`
+    : "Todas las preguntas están respondidas. Puedes finalizar y consultar la revisión.";
+}
+
+finishButton.addEventListener("click", showQuizSummary);
+
+function getResultMessage(score) {
+  if (score >= 9) return "¡Excelente! Dominas los conceptos principales";
+  if (score >= 7) return "¡Muy bien! Comprendes la mayoría de los conceptos";
+  if (score >= 5) return "Buen comienzo. Repasa los temas en los que tuviste dificultades";
+  return "Te recomendamos revisar el contenido y volver a intentarlo";
+}
+
 function renderResults() {
+  if (selectedAnswers.some((answer) => answer === null)) return;
+
   const correctCount = questions.reduce((total, question, index) => total + (selectedAnswers[index] === question.answer ? 1 : 0), 0);
   const incorrectCount = questions.length - correctCount;
+  const score = (correctCount / questions.length) * 10;
   const reviewItems = questions.map((question, index) => {
     const isCorrect = selectedAnswers[index] === question.answer;
     const article = document.createElement("article");
@@ -327,7 +398,7 @@ function renderResults() {
     const statusLabel = document.createElement("span");
     statusLabel.className = "review-status";
     statusLabel.textContent = isCorrect ? "✓ Correcta." : "✕ Incorrecta.";
-    status.append(statusLabel, document.createTextNode(`Tu respuesta: ${question.options[selectedAnswers[index]]}`));
+    status.append(statusLabel, document.createTextNode(` Tu respuesta: ${question.options[selectedAnswers[index]]}`));
 
     const correctAnswer = document.createElement("p");
     correctAnswer.className = "review-answer";
@@ -349,15 +420,15 @@ function renderResults() {
   title.textContent = "Evaluación completada";
   const subtitle = document.createElement("p");
   subtitle.className = "results-subtitle";
-  subtitle.textContent = correctCount >= 8 ? "¡Excelente! Tienes una base sólida." : correctCount >= 5 ? "Buen avance. Revisa las explicaciones para reforzar." : "Sigue explorando los módulos y vuelve a intentarlo.";
+  subtitle.textContent = getResultMessage(score);
   resultCopy.append(title, subtitle);
   const scoreBadge = document.createElement("div");
   scoreBadge.className = "score-badge";
-  const score = document.createElement("strong");
-  score.textContent = `${correctCount}/10`;
+  const scoreValue = document.createElement("strong");
+  scoreValue.textContent = `${score}/10`;
   const scoreLabel = document.createElement("span");
   scoreLabel.textContent = "CALIFICACIÓN";
-  scoreBadge.append(score, scoreLabel);
+  scoreBadge.append(scoreValue, scoreLabel);
   header.append(resultCopy, scoreBadge);
 
   const stats = document.createElement("div");
@@ -390,32 +461,23 @@ function renderResults() {
   retryButton.type = "button";
   retryButton.textContent = "Intentar nuevamente";
   retryButton.addEventListener("click", resetQuiz);
-  actions.append(retryButton);
 
   quizResults.replaceChildren(header, stats, reviewHeading, reviewList, actions);
+  actions.append(retryButton);
   quizResults.hidden = false;
+  quizSummary.hidden = true;
   quizStage.hidden = true;
   quizFootnote.hidden = true;
   isFinished = true;
+  quizResults.focus();
 }
-
-finishButton.addEventListener("click", () => {
-  const unansweredIndex = selectedAnswers.indexOf(null);
-  if (unansweredIndex !== -1) {
-    const unansweredCount = selectedAnswers.filter((answer) => answer === null).length;
-    currentQuestion = unansweredIndex;
-    renderQuestion();
-    feedback.textContent = `Faltan ${unansweredCount} respuestas. Completa todas antes de finalizar.`;
-    return;
-  }
-  renderResults();
-});
 
 function resetQuiz() {
   selectedAnswers = Array(questions.length).fill(null);
   currentQuestion = 0;
   isFinished = false;
   quizResults.hidden = true;
+  quizSummary.hidden = true;
   quizStage.hidden = false;
   quizFootnote.hidden = false;
   renderQuestion();

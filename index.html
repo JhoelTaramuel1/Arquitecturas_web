@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101a35">
-  <meta name="description" content="Una guía interactiva para aprender arquitectura desacoplada y microservicios: conceptos, diagramas, ventajas, ejemplos y cuestionario.">
-  <title>Microservicios | Arquitectura desacoplada</title>
+  <meta name="description" content="Guía interactiva para comprender la arquitectura monolítica, sus módulos, ventajas, límites y usos.">
+  <title>Arquitectura monolítica | ARQ.LAB</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -23,28 +23,29 @@
     <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2m6-10a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm6-7a4 4 0 0 1 0 7m2 4a4 4 0 0 1 4 4v2"/></symbol>
     <symbol id="i-box" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Zm-9 5v8l9 5 9-5V8m-9 5v8"/></symbol>
     <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l1 13H4L5 8Zm4 0a3 3 0 0 1 6 0"/></symbol>
-    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9m-8 12a2 2 0 0 0 4 0"/></symbol>
     <symbol id="i-credit" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20m-15 5h3"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
     <symbol id="i-x" viewBox="0 0 24 24"><path d="m18 6-12 12M6 6l12 12"/></symbol>
     <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 12 7-12 7V5Z"/></symbol>
     <symbol id="i-graduation" viewBox="0 0 24 24"><path d="m2 10 10-5 10 5-10 5-10-5Zm4 2v5c3 3 9 3 12 0v-5m4-2v7"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></symbol>
+    <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l4-2 4 2 4-2 4 2V2l-4 2-4-2-4 2-4-2Zm4 7h8m-8 4h8"/></symbol>
   </svg>
 
   <header class="site-header">
     <div class="nav-wrap">
-      <a class="brand" href="#inicio" aria-label="Microservicios, volver al inicio">
-        <span class="brand-mark"><svg class="icon"><use href="#i-network"/></svg></span>
+      <a class="brand" href="#inicio" aria-label="ARQ.LAB, volver al inicio">
+        <span class="brand-mark"><svg class="icon"><use href="#i-cube"/></svg></span>
         <span>ARQ<span class="brand-dot">.</span>LAB</span>
       </a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú">
         <span></span><span></span><span></span>
       </button>
       <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
-        <a href="#concepto">Conceptos</a>
-        <a href="#funcionamiento">Cómo funciona</a>
+        <a href="#concepto">Concepto</a>
+        <a href="#funcionamiento">Diagrama</a>
+        <a href="#caracteristicas">Características</a>
         <a href="#comparacion">Comparación</a>
-        <a href="#ventajas">Pros y contras</a>
         <a href="#video">Video</a>
       </nav>
       <a class="nav-cta" href="#quiz">Ponerme a prueba <span aria-hidden="true">↗</span></a>
@@ -57,23 +58,28 @@
       <div class="hero-content container">
         <div class="hero-copy">
           <p class="eyebrow"><span class="eyebrow-line"></span> GUÍA INTERACTIVA · INGENIERÍA DE SOFTWARE</p>
-          <h1>Arquitectura<br>desacoplada:<br><span>el poder de los</span><br><span class="gradient-text">microservicios.</span></h1>
-          <p class="hero-description">Imagina una aplicación como un equipo de especialistas: cada servicio resuelve una tarea y colabora con los demás a través de contratos claros.</p>
+          <h1>Arquitectura<br>monolítica:<br><span>una aplicación,</span><br><span class="gradient-text">un sistema integrado.</span></h1>
+          <p class="hero-description">La arquitectura monolítica integra los principales componentes de una aplicación en una misma unidad de software. Conoce cómo funciona, sus beneficios, sus límites y cuándo puede ser una buena opción.</p>
           <div class="hero-actions">
             <a class="button button-primary" href="#concepto">Explorar el contenido <svg class="icon"><use href="#i-arrow"/></svg></a>
-            <a class="button button-outline" href="#quiz"><svg class="icon"><use href="#i-graduation"/></svg> Evaluar mis conocimientos</a>
+            <a class="button button-outline" href="#quiz"><svg class="icon"><use href="#i-graduation"/></svg> Poner a prueba mis conocimientos</a>
           </div>
-          <div class="hero-meta"><span class="meta-dot"></span> Aprende a tu ritmo <span class="meta-divider">/</span> 9 módulos breves</div>
+          <div class="hero-meta"><span class="meta-dot"></span> Aprende a tu ritmo <span class="meta-divider">/</span> 10 preguntas interactivas</div>
         </div>
-        <div class="hero-art" role="img" aria-label="Diagrama de servicios independientes conectados por una API">
-          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-          <div class="api-core"><span class="core-icon"><svg class="icon"><use href="#i-network"/></svg></span><b>API</b><small>contrato común</small></div>
-          <div class="service-node node-users"><span class="node-icon"><svg class="icon"><use href="#i-users"/></svg></span><span>Usuarios</span><i></i></div>
-          <div class="service-node node-orders"><span class="node-icon"><svg class="icon"><use href="#i-bag"/></svg></span><span>Pedidos</span><i></i></div>
-          <div class="service-node node-products"><span class="node-icon"><svg class="icon"><use href="#i-box"/></svg></span><span>Productos</span><i></i></div>
-          <div class="service-node node-payments"><span class="node-icon"><svg class="icon"><use href="#i-credit"/></svg></span><span>Pagos</span><i></i></div>
-          <div class="art-label"><span class="pulse"></span> servicios colaborando <span class="label-arrow">↗</span></div>
-          <div class="art-caption">Una aplicación. Varias piezas autónomas.</div>
+        <div class="hero-art monolith-art" role="img" aria-label="Ilustración de una aplicación monolítica con módulos de usuarios, productos, pedidos y pagos integrados en un mismo sistema">
+          <div class="monolith-glow"></div>
+          <div class="app-frame">
+            <div class="app-frame-top"><span class="window-dots"><i></i><i></i><i></i></span><span>TIENDA.APP</span><span class="deploy-tag">UNA UNIDAD</span></div>
+            <div class="app-modules">
+              <div class="app-module module-users"><svg class="icon"><use href="#i-users"/></svg><span>Usuarios</span></div>
+              <div class="app-module module-products"><svg class="icon"><use href="#i-box"/></svg><span>Productos</span></div>
+              <div class="app-module module-orders"><svg class="icon"><use href="#i-bag"/></svg><span>Pedidos</span></div>
+              <div class="app-module module-payments"><svg class="icon"><use href="#i-credit"/></svg><span>Pagos</span></div>
+            </div>
+            <div class="app-layers"><span><svg class="icon"><use href="#i-code"/></svg> Lógica de negocio</span><span><svg class="icon"><use href="#i-database"/></svg> Acceso a datos</span></div>
+          </div>
+          <div class="art-label"><span class="pulse"></span> componentes integrados</div>
+          <div class="art-caption">Módulos distintos. Una aplicación desplegable.</div>
         </div>
       </div>
       <a class="scroll-cue" href="#concepto" aria-label="Desplazarse al contenido"><span></span> DESLIZA PARA EXPLORAR</a>
@@ -82,24 +88,24 @@
     <section class="section section-intro" id="concepto">
       <div class="container">
         <div class="section-heading">
-          <div><p class="eyebrow eyebrow-light"><span class="eyebrow-line"></span> EMPECEMOS POR LO ESENCIAL</p><h2>¿Qué significa <span class="text-gradient">desacoplar?</span></h2></div>
-          <p class="section-lede">Es diseñar las partes de un sistema para que puedan cambiar y evolucionar sin tener que modificar todo lo demás.</p>
+          <div><p class="eyebrow eyebrow-light"><span class="eyebrow-line"></span> EMPECEMOS POR LO ESENCIAL</p><h2>¿Qué es la arquitectura <span class="text-gradient">monolítica?</span></h2></div>
+          <p class="section-lede">Es un enfoque donde las partes principales de una aplicación se construyen y se ejecutan juntas como un sistema integrado.</p>
         </div>
         <div class="concept-layout">
           <div class="concept-main">
             <span class="step-number">01 / CONCEPTO</span>
-            <h3>Menos dependencias.<br>Más libertad para evolucionar.</h3>
-            <p>En un sistema desacoplado, cada componente tiene una responsabilidad clara y se comunica con otros mediante interfaces definidas. No necesita conocer los detalles internos de sus colaboradores.</p>
-            <p>Los <strong>microservicios</strong> llevan esta idea a la arquitectura: una aplicación se construye como un conjunto de servicios pequeños, autónomos y enfocados en capacidades de negocio.</p>
-            <div class="analogy"><span class="analogy-icon">✳</span><p><strong>Una analogía:</strong> piensa en un restaurante. Cocina, caja y reparto tienen tareas distintas; coordinan un pedido usando información acordada, sin necesitar saber cómo trabaja cada área por dentro.</p></div>
+            <h3>Una aplicación completa,<br>con responsabilidades distintas.</h3>
+            <p>En un monolito, la interfaz, las reglas del negocio y el acceso a los datos forman parte de una misma aplicación. Sus módulos colaboran dentro del mismo proceso, por ejemplo llamando funciones internas, en lugar de necesitar una llamada de red entre servicios.</p>
+            <p>Al construir la aplicación, sus componentes suelen compilarse y probarse juntos. Después se publica como una unidad: una sola versión contiene las capacidades necesarias para ejecutar el producto.</p>
+            <div class="analogy"><span class="analogy-icon">✳</span><p><strong>Un ejemplo cotidiano:</strong> una tienda en línea puede administrar usuarios, productos, pedidos y pagos desde una misma aplicación. Cada área tiene una tarea, aunque todas se entreguen juntas.</p></div>
           </div>
           <div class="concept-cards">
-            <article class="info-card"><span class="card-icon violet"><svg class="icon"><use href="#i-cube"/></svg></span><div><h3>Autonomía</h3><p>Cada servicio controla una capacidad concreta y puede evolucionar con menor impacto en el resto.</p></div><span class="card-index">01</span></article>
-            <article class="info-card"><span class="card-icon blue"><svg class="icon"><use href="#i-code"/></svg></span><div><h3>Contratos claros</h3><p>API y mensajes especifican qué datos intercambiar, sin exponer la implementación interna.</p></div><span class="card-index">02</span></article>
-            <article class="info-card"><span class="card-icon aqua"><svg class="icon"><use href="#i-network"/></svg></span><div><h3>Comunicación</h3><p>Los servicios suelen colaborar por HTTP/REST, gRPC o mensajería asíncrona.</p></div><span class="card-index">03</span></article>
+            <article class="info-card"><span class="card-icon violet"><svg class="icon"><use href="#i-code"/></svg></span><div><h3>Interfaz</h3><p>Recibe las acciones de la persona: buscar productos, crear una cuenta o confirmar un pedido.</p></div><span class="card-index">01</span></article>
+            <article class="info-card"><span class="card-icon blue"><svg class="icon"><use href="#i-cube"/></svg></span><div><h3>Lógica de negocio</h3><p>Aplica reglas como calcular el total, verificar existencias o validar un pago.</p></div><span class="card-index">02</span></article>
+            <article class="info-card"><span class="card-icon aqua"><svg class="icon"><use href="#i-database"/></svg></span><div><h3>Acceso a datos</h3><p>Lee y guarda la información que utilizan los módulos de la aplicación.</p></div><span class="card-index">03</span></article>
           </div>
         </div>
-        <div class="definition-strip"><div><span class="strip-label">EN POCAS PALABRAS</span><p>Un microservicio es un servicio pequeño, desplegable de forma independiente y responsable de una capacidad del negocio.</p></div><span class="strip-mark">µS</span></div>
+        <div class="definition-strip"><div><span class="strip-label">IDEA CLAVE</span><p>Monolítico describe cómo se integra y despliega el sistema; no significa que el código deba estar desordenado.</p></div><span class="strip-mark">APP</span></div>
       </div>
     </section>
 
@@ -107,26 +113,94 @@
       <div class="container">
         <div class="section-heading">
           <div><p class="eyebrow eyebrow-light"><span class="eyebrow-line"></span> UN SISTEMA EN ACCIÓN</p><h2>¿Cómo funciona una <span class="text-gradient">tienda online?</span></h2></div>
-          <p class="section-lede">Selecciona un servicio para descubrir su función. Cada equipo mantiene su lógica y sus datos bajo control.</p>
+          <p class="section-lede">Selecciona un módulo o una capa para ver su función. Observa cómo colaboran dentro de una misma aplicación.</p>
         </div>
-        <div class="architecture-board">
-          <div class="board-topline"><span><span class="live-dot"></span> VISTA DE ARQUITECTURA</span><span class="board-tag">E-COMMERCE · EJEMPLO</span></div>
-          <div class="flow-entry"><span class="entry-icon"><svg class="icon"><use href="#i-users"/></svg></span><div><b>Cliente</b><small>navegador o app</small></div><span class="flow-arrow">→</span><div class="gateway"><span class="gateway-icon"><svg class="icon"><use href="#i-network"/></svg></span><span><b>API Gateway</b><small>entrada y enrutamiento</small></span></div></div>
-          <div class="service-map">
-            <div class="map-line" aria-hidden="true"></div>
-            <div class="service-grid">
-              <button class="service-card selected" type="button" data-service="users" aria-pressed="true"><span class="svc-icon svc-violet"><svg class="icon"><use href="#i-users"/></svg></span><span class="svc-name">Usuarios</span><span class="svc-caption">perfiles y acceso</span><span class="db-chip"><svg class="icon"><use href="#i-database"/></svg> DB usuarios</span></button>
-              <button class="service-card" type="button" data-service="products" aria-pressed="false"><span class="svc-icon svc-blue"><svg class="icon"><use href="#i-box"/></svg></span><span class="svc-name">Productos</span><span class="svc-caption">catálogo e inventario</span><span class="db-chip"><svg class="icon"><use href="#i-database"/></svg> DB catálogo</span></button>
-              <button class="service-card" type="button" data-service="orders" aria-pressed="false"><span class="svc-icon svc-amber"><svg class="icon"><use href="#i-bag"/></svg></span><span class="svc-name">Pedidos</span><span class="svc-caption">carrito y órdenes</span><span class="db-chip"><svg class="icon"><use href="#i-database"/></svg> DB pedidos</span></button>
-              <button class="service-card" type="button" data-service="payments" aria-pressed="false"><span class="svc-icon svc-green"><svg class="icon"><use href="#i-credit"/></svg></span><span class="svc-name">Pagos</span><span class="svc-caption">cobros y reembolsos</span><span class="db-chip"><svg class="icon"><use href="#i-database"/></svg> DB pagos</span></button>
-              <button class="service-card" type="button" data-service="notifications" aria-pressed="false"><span class="svc-icon svc-pink"><svg class="icon"><use href="#i-bell"/></svg></span><span class="svc-name">Notificaciones</span><span class="svc-caption">emails y avisos</span><span class="db-chip"><svg class="icon"><use href="#i-database"/></svg> preferencia</span></button>
+        <div class="architecture-board monolith-board">
+          <div class="board-topline"><span><span class="live-dot"></span> VISTA DE ARQUITECTURA</span><span class="board-tag">TIENDA · APLICACIÓN MONOLÍTICA</span></div>
+          <div class="monolith-boundary">
+            <div class="monolith-boundary-label"><svg class="icon"><use href="#i-cube"/></svg> APLICACIÓN TIENDA <span>se construye y despliega como unidad</span></div>
+            <div class="module-grid">
+              <button class="service-card selected" type="button" data-module="users" aria-pressed="true"><span class="svc-icon svc-violet"><svg class="icon"><use href="#i-users"/></svg></span><span class="svc-name">Usuarios</span><span class="svc-caption">perfiles y acceso</span></button>
+              <button class="service-card" type="button" data-module="products" aria-pressed="false"><span class="svc-icon svc-blue"><svg class="icon"><use href="#i-box"/></svg></span><span class="svc-name">Productos</span><span class="svc-caption">catálogo e inventario</span></button>
+              <button class="service-card" type="button" data-module="orders" aria-pressed="false"><span class="svc-icon svc-amber"><svg class="icon"><use href="#i-bag"/></svg></span><span class="svc-name">Pedidos</span><span class="svc-caption">carrito y órdenes</span></button>
+              <button class="service-card" type="button" data-module="payments" aria-pressed="false"><span class="svc-icon svc-green"><svg class="icon"><use href="#i-credit"/></svg></span><span class="svc-name">Pagos</span><span class="svc-caption">cobros y reembolsos</span></button>
             </div>
-            <div class="connector-label connector-sync">HTTP / API</div>
-            <div class="connector-label connector-async">eventos · asíncrono</div>
+            <div class="internal-flow" aria-hidden="true"><span>llamadas internas</span><i>↕</i><span>comparten proceso</span></div>
+            <div class="layer-grid">
+              <button class="layer-card" type="button" data-module="business" aria-pressed="false"><span class="layer-icon"><svg class="icon"><use href="#i-code"/></svg></span><span><b>Lógica de negocio</b><small>coordina reglas y módulos</small></span></button>
+              <button class="layer-card" type="button" data-module="data" aria-pressed="false"><span class="layer-icon"><svg class="icon"><use href="#i-server"/></svg></span><span><b>Acceso a datos</b><small>consulta y persiste información</small></span></button>
+            </div>
           </div>
-          <div class="service-detail" aria-live="polite"><span class="detail-pulse"></span><div><span class="detail-eyebrow">SERVICIO SELECCIONADO</span><h3 id="service-title">Servicio de usuarios</h3><p id="service-description">Gestiona perfiles, direcciones y autenticación. Expone operaciones para que otros servicios consulten la identidad del cliente sin acceder a sus datos internos.</p></div><span class="detail-code">service.<br>users()</span></div>
-          <p class="board-note"><svg class="icon"><use href="#i-database"/></svg> Cada servicio puede ser dueño de sus datos. Las bases de datos separadas son un patrón frecuente, no una regla obligatoria.</p>
+          <div class="database-connector"><span aria-hidden="true">↓</span><span>consultas y cambios de datos</span></div>
+          <div class="database-card"><svg class="icon"><use href="#i-database"/></svg><div><b>Base de datos</b><small>usuarios · productos · pedidos · pagos</small></div></div>
+          <div class="service-detail" aria-live="polite"><span class="detail-pulse"></span><div><span class="detail-eyebrow">COMPONENTE SELECCIONADO</span><h3 id="module-title">Módulo de usuarios</h3><p id="module-description">Gestiona perfiles, direcciones y autenticación como parte de la aplicación de la tienda. Puede utilizar las reglas internas y la capa de datos compartida.</p></div><span class="detail-code">tienda.<br>modulo()</span></div>
+          <p class="board-note"><svg class="icon"><use href="#i-cube"/></svg> Los módulos pueden estar bien separados en el código; el conjunto sigue desplegándose habitualmente como una sola aplicación.</p>
         </div>
+      </div>
+    </section>
+
+    <section class="section" id="caracteristicas">
+      <div class="container">
+        <div class="section-heading">
+          <div><p class="eyebrow eyebrow-light"><span class="eyebrow-line"></span> PIEZAS DE UN MISMO CONJUNTO</p><h2>Características <span class="text-gradient">principales</span></h2></div>
+          <p class="section-lede">El enfoque monolítico describe la integración y el despliegue, no impide crear límites claros dentro del código.</p>
+        </div>
+        <div class="characteristics-grid">
+          <article class="characteristic-card"><span class="characteristic-icon"><svg class="icon"><use href="#i-cube"/></svg></span><h3>Código integrado</h3><p>Las funcionalidades forman parte de la misma aplicación. Ejemplo: el catálogo y el carrito están en el mismo producto de software.</p></article>
+          <article class="characteristic-card"><span class="characteristic-icon"><svg class="icon"><use href="#i-network"/></svg></span><h3>Módulos organizados</h3><p>El código puede separarse por responsabilidad. Por ejemplo, usuarios y pagos tienen carpetas y reglas propias.</p></article>
+          <article class="characteristic-card"><span class="characteristic-icon"><svg class="icon"><use href="#i-server"/></svg></span><h3>Despliegue conjunto</h3><p>Una nueva versión suele incluir el sistema completo, aunque el cambio afecte solo al catálogo.</p></article>
+          <article class="characteristic-card"><span class="characteristic-icon"><svg class="icon"><use href="#i-code"/></svg></span><h3>Comunicación interna</h3><p>Los módulos pueden llamarse directamente dentro del mismo proceso, como una función de inventario usada al crear un pedido.</p></article>
+          <article class="characteristic-card"><span class="characteristic-icon"><svg class="icon"><use href="#i-check"/></svg></span><h3>Desarrollo centralizado</h3><p>Construcción, pruebas y depuración suelen ocurrir en el mismo proyecto y entorno de desarrollo.</p></article>
+          <article class="characteristic-card"><span class="characteristic-icon"><svg class="icon"><use href="#i-database"/></svg></span><h3>Recursos compartidos</h3><p>Los módulos pueden reutilizar bibliotecas, configuración y, si el diseño lo permite, estructuras de datos comunes.</p></article>
+          <article class="characteristic-card"><span class="characteristic-icon"><svg class="icon"><use href="#i-arrow"/></svg></span><h3>Escalado de la aplicación</h3><p>En la configuración habitual se agregan recursos o instancias al sistema entero, no solo a un módulo.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark benefits-section" id="ventajas">
+      <div class="container">
+        <div class="section-heading">
+          <div><p class="eyebrow"><span class="eyebrow-line"></span> ELEGIR TAMBIÉN ES ENTENDER LOS COSTES</p><h2>Un comienzo simple, <span class="gradient-text">con límites que observar</span></h2></div>
+          <p class="section-lede">Las ventajas y desventajas dependen del diseño, del tamaño del sistema y de las prácticas del equipo.</p>
+        </div>
+        <div class="benefit-columns">
+          <div class="benefit-column advantages">
+            <div class="column-heading"><span class="column-symbol">+</span><div><span class="column-overline">CUANDO APORTAN VALOR</span><h3>Ventajas</h3></div></div>
+            <article class="benefit-item"><span class="benefit-check"><svg class="icon"><use href="#i-check"/></svg></span><div><h4>Fácil para empezar</h4><p>Un proyecto pequeño puede avanzar sin coordinar muchos servicios y despliegues.</p></div></article>
+            <article class="benefit-item"><span class="benefit-check"><svg class="icon"><use href="#i-check"/></svg></span><div><h4>Estructura inicial sencilla</h4><p>El equipo trabaja sobre un proyecto y un flujo de ejecución comunes.</p></div></article>
+            <article class="benefit-item"><span class="benefit-check"><svg class="icon"><use href="#i-check"/></svg></span><div><h4>Desarrollo y despliegue directos</h4><p>En muchos casos hay menos piezas de infraestructura que preparar y mantener.</p></div></article>
+            <article class="benefit-item"><span class="benefit-check"><svg class="icon"><use href="#i-check"/></svg></span><div><h4>Pruebas y depuración locales</h4><p>Es posible ejecutar buena parte de la aplicación en un solo entorno.</p></div></article>
+            <article class="benefit-item"><span class="benefit-check"><svg class="icon"><use href="#i-check"/></svg></span><div><h4>Comunicación interna rápida</h4><p>Los módulos pueden colaborar sin llamadas de red entre servicios.</p></div></article>
+            <article class="benefit-item"><span class="benefit-check"><svg class="icon"><use href="#i-check"/></svg></span><div><h4>Menos operación distribuida</h4><p>Frente a una solución distribuida equivalente, suele requerir menos coordinación operativa inicial.</p></div></article>
+          </div>
+          <div class="benefit-column tradeoffs">
+            <div class="column-heading"><span class="column-symbol">−</span><div><span class="column-overline">COSTES A TENER EN CUENTA</span><h3>Desventajas</h3></div></div>
+            <article class="benefit-item"><span class="benefit-check"><svg class="icon"><use href="#i-x"/></svg></span><div><h4>Mantenimiento más difícil al crecer</h4><p>Sin límites claros, los cambios en una zona pueden afectar muchas otras.</p></div></article>
+            <article class="benefit-item"><span class="benefit-check"><svg class="icon"><use href="#i-x"/></svg></span><div><h4>Despliegue de toda la aplicación</h4><p>Una modificación pequeña puede requerir publicar una nueva versión del conjunto.</p></div></article>
+            <article class="benefit-item"><span class="benefit-check"><svg class="icon"><use href="#i-x"/></svg></span><div><h4>Escalado menos selectivo</h4><p>Normalmente se agregan recursos para el sistema completo, incluso si una función concentra la carga.</p></div></article>
+            <article class="benefit-item"><span class="benefit-check"><svg class="icon"><use href="#i-x"/></svg></span><div><h4>Fallos con impacto amplio</h4><p>Un error grave puede afectar al proceso o a toda la aplicación.</p></div></article>
+            <article class="benefit-item"><span class="benefit-check"><svg class="icon"><use href="#i-x"/></svg></span><div><h4>Acoplamiento entre equipos</h4><p>Compartir código o datos sin límites claros puede dificultar el trabajo independiente.</p></div></article>
+            <article class="benefit-item"><span class="benefit-check"><svg class="icon"><use href="#i-x"/></svg></span><div><h4>Construcción y pruebas más largas</h4><p>En sistemas grandes, validar una modificación puede requerir probar mucho más que el módulo cambiado.</p></div></article>
+          </div>
+        </div>
+        <p class="tradeoff-note">Estas desventajas no son inevitables: influyen la calidad del diseño, el tamaño del sistema y las prácticas de desarrollo.</p>
+      </div>
+    </section>
+
+    <section class="section examples-section" id="ejemplos">
+      <div class="container">
+        <div class="section-heading">
+          <div><p class="eyebrow eyebrow-light"><span class="eyebrow-line"></span> LLEVÉMOSLO A CONTEXTOS CONOCIDOS</p><h2>Ejemplos <span class="text-gradient">prácticos</span></h2></div>
+          <p class="section-lede">Son diseños posibles para aprender; no afirmaciones sobre la arquitectura interna de sistemas reales.</p>
+        </div>
+        <div class="examples-grid">
+          <article class="example-card"><span class="example-icon example-purple"><svg class="icon"><use href="#i-box"/></svg></span><span class="example-number">01 / COMERCIO</span><h3>Inventario de una tienda</h3><p>Productos, existencias, proveedores y movimientos de stock dentro de la misma aplicación.</p><span class="example-flow">PRODUCTOS <i>→</i> STOCK <i>→</i> REPORTES</span></article>
+          <article class="example-card"><span class="example-icon example-blue"><svg class="icon"><use href="#i-book"/></svg></span><span class="example-number">02 / CULTURA</span><h3>Gestión de biblioteca</h3><p>Catálogo de libros, usuarios, préstamos, devoluciones y multas como módulos de un solo sistema.</p><span class="example-flow">LIBROS <i>→</i> PRÉSTAMOS</span></article>
+          <article class="example-card"><span class="example-icon example-green"><svg class="icon"><use href="#i-graduation"/></svg></span><span class="example-number">03 / EDUCACIÓN</span><h3>Matrículas educativas</h3><p>Estudiantes, cursos, matrículas y horarios gestionados desde una aplicación institucional.</p><span class="example-flow">ESTUDIANTES <i>→</i> CURSOS</span></article>
+          <article class="example-card"><span class="example-icon example-amber"><svg class="icon"><use href="#i-receipt"/></svg></span><span class="example-number">04 / EMPRESA</span><h3>Facturación pequeña</h3><p>Clientes, productos, facturas y pagos como funciones de un sistema compacto.</p><span class="example-flow">CLIENTES <i>→</i> FACTURAS</span></article>
+          <article class="example-card"><span class="example-icon example-purple"><svg class="icon"><use href="#i-server"/></svg></span><span class="example-number">05 / NEGOCIO</span><h3>Sistema administrativo</h3><p>Personal, compras, ventas e informes que colaboran dentro de una herramienta interna.</p><span class="example-flow">VENTAS <i>→</i> COMPRAS <i>→</i> INFORMES</span></article>
+        </div>
+        <p class="disclaimer"><span>i</span> Son ejemplos ilustrativos de sistemas que podrían diseñarse como monolitos. No todos los sistemas reales de estos sectores usan esta arquitectura.</p>
       </div>
     </section>
 
@@ -134,121 +208,79 @@
       <div class="container">
         <div class="section-heading">
           <div><p class="eyebrow eyebrow-light"><span class="eyebrow-line"></span> DOS ENFOQUES, DISTINTAS NECESIDADES</p><h2>Monolito vs. <span class="text-gradient">microservicios</span></h2></div>
-          <p class="section-lede">No existe una opción universalmente mejor. La decisión depende del equipo, el producto y sus restricciones.</p>
+          <p class="section-lede">Ningún enfoque es siempre superior. Elige según el tamaño, las necesidades y la capacidad operativa del proyecto.</p>
         </div>
         <div class="table-wrap" role="region" aria-label="Tabla comparativa, desplazable horizontalmente" tabindex="0">
           <table class="comparison-table">
-            <thead><tr><th scope="col">Característica</th><th scope="col"><span class="table-heading mono-heading"><svg class="icon"><use href="#i-cube"/></svg> Monolítica</span></th><th scope="col"><span class="table-heading micro-heading"><svg class="icon"><use href="#i-network"/></svg> Desacoplada / microservicios</span></th></tr></thead>
+            <thead><tr><th scope="col">Aspecto</th><th scope="col"><span class="table-heading mono-heading"><svg class="icon"><use href="#i-cube"/></svg> Monolito</span></th><th scope="col"><span class="table-heading micro-heading"><svg class="icon"><use href="#i-network"/></svg> Microservicios</span></th></tr></thead>
             <tbody>
-              <tr><th scope="row">Estructura</th><td>Una aplicación y unidad de código.</td><td>Servicios pequeños por capacidad de negocio.</td></tr>
-              <tr><th scope="row">Independencia</th><td>Los módulos suelen compartir proceso y recursos.</td><td>Servicios aislados que colaboran por contratos.</td></tr>
-              <tr><th scope="row">Despliegue</th><td>Se publica normalmente el conjunto completo.</td><td>Cada servicio puede publicarse por separado.</td></tr>
-              <tr><th scope="row">Escalabilidad</th><td>Se escala la aplicación, incluso si solo una parte lo requiere.</td><td>Se puede escalar selectivamente el servicio con más carga.</td></tr>
-              <tr><th scope="row">Mantenimiento</th><td>Simple al inicio; cambios pueden afectar varias áreas.</td><td>Cambios más localizados, con más coordinación distribuida.</td></tr>
-              <tr><th scope="row">Tolerancia a fallos</th><td>Un fallo puede afectar al proceso completo.</td><td>El aislamiento ayuda, pero hay que gestionar fallos de red y dependencias.</td></tr>
-              <tr><th scope="row">Complejidad</th><td>Menos piezas de infraestructura al comenzar.</td><td>Mayor exigencia de observabilidad, automatización y operación.</td></tr>
-              <tr><th scope="row">Cuándo encaja</th><td>Productos pequeños, equipos reducidos o dominio aún cambiante.</td><td>Dominios y equipos que necesitan escalar y desplegar con autonomía.</td></tr>
+              <tr><th scope="row">Organización</th><td>Una aplicación; puede tener módulos internos.</td><td>Servicios separados por capacidades de negocio.</td></tr>
+              <tr><th scope="row">Despliegue</th><td>El conjunto suele publicarse como una unidad.</td><td>Cada servicio puede publicarse por separado.</td></tr>
+              <tr><th scope="row">Escalabilidad</th><td>Habitualmente se escala toda la aplicación.</td><td>Es posible escalar servicios de forma selectiva.</td></tr>
+              <tr><th scope="row">Comunicación</th><td>Llamadas internas dentro del proceso.</td><td>Comunicación por red y contratos entre servicios.</td></tr>
+              <tr><th scope="row">Complejidad operativa</th><td>Menor al inicio: menos procesos distribuidos que operar.</td><td>Mayor: redes, despliegues y observabilidad distribuidos.</td></tr>
+              <tr><th scope="row">Mantenimiento</th><td>Sencillo al inicio; puede dificultarse si crece sin límites claros.</td><td>Cambios localizados, con coordinación entre servicios.</td></tr>
+              <tr><th scope="row">Independencia de equipos</th><td>El código compartido puede requerir coordinación.</td><td>Los equipos pueden tener más autonomía si los límites están bien definidos.</td></tr>
+              <tr><th scope="row">Cuándo encaja</th><td>Proyectos pequeños o medianos, equipos reducidos o producto en evolución.</td><td>Cuando se necesitan despliegue y escalado independientes y se puede asumir su complejidad.</td></tr>
             </tbody>
           </table>
         </div>
-        <div class="migration-card"><span class="migration-icon"><svg class="icon"><use href="#i-arrow"/></svg></span><div><span class="step-number">EVOLUCIÓN PRÁCTICA</span><h3>Del monolito a servicios, paso a paso</h3><p>Una tienda puede empezar como monolito. Cuando el catálogo requiere cambios y escalado propios, se extrae primero ese módulo detrás de una API. Después, si el valor lo justifica, se separan pagos o notificaciones. Medir y extraer gradualmente reduce el riesgo de una reescritura total.</p></div><div class="migration-steps"><span><b>01</b> identificar límites</span><span><b>02</b> extraer una capacidad</span><span><b>03</b> observar y ajustar</span></div></div>
-      </div>
-    </section>
-
-    <section class="section section-dark benefits-section" id="ventajas">
-      <div class="container">
-        <div class="section-heading">
-          <div><p class="eyebrow"><span class="eyebrow-line"></span> ELEGIR TAMBIÉN ES ENTENDER LOS COSTES</p><h2>El equilibrio entre <span class="gradient-text">agilidad y complejidad</span></h2></div>
-          <p class="section-lede">La autonomía aporta flexibilidad, pero no es gratis. Considera ambas caras antes de adoptar este enfoque.</p>
-        </div>
-        <div class="benefit-columns">
-          <div class="benefit-column advantages">
-            <div class="column-heading"><span class="column-symbol">+</span><div><span class="column-overline">CUANDO APORTAN VALOR</span><h3>Ventajas</h3></div></div>
-            <article class="benefit-item"><span class="benefit-check"><svg class="icon"><use href="#i-check"/></svg></span><div><h4>Despliegue independiente</h4><p>Publicar una mejora en el catálogo sin desplegar el sistema de pagos.</p></div></article>
-            <article class="benefit-item"><span class="benefit-check"><svg class="icon"><use href="#i-check"/></svg></span><div><h4>Escalabilidad selectiva</h4><p>Asignar más recursos al servicio de pedidos durante una campaña de ventas.</p></div></article>
-            <article class="benefit-item"><span class="benefit-check"><svg class="icon"><use href="#i-check"/></svg></span><div><h4>Mantenimiento localizado</h4><p>Un cambio en notificaciones puede quedar acotado a esa capacidad.</p></div></article>
-            <article class="benefit-item"><span class="benefit-check"><svg class="icon"><use href="#i-check"/></svg></span><div><h4>Libertad tecnológica</h4><p>Usar herramientas distintas cuando una necesidad real lo justifique.</p></div></article>
-            <article class="benefit-item"><span class="benefit-check"><svg class="icon"><use href="#i-check"/></svg></span><div><h4>Equipos autónomos</h4><p>Equipos con límites claros pueden decidir y entregar con menos bloqueos.</p></div></article>
-          </div>
-          <div class="benefit-column tradeoffs">
-            <div class="column-heading"><span class="column-symbol">−</span><div><span class="column-overline">COSTES A TENER EN CUENTA</span><h3>Desventajas</h3></div></div>
-            <article class="benefit-item"><span class="benefit-check"><svg class="icon"><use href="#i-x"/></svg></span><div><h4>Más infraestructura</h4><p>Hay más procesos, despliegues, redes y configuraciones por operar.</p></div></article>
-            <article class="benefit-item"><span class="benefit-check"><svg class="icon"><use href="#i-x"/></svg></span><div><h4>Fallos de red</h4><p>Una API puede no responder; se necesitan límites de tiempo y reintentos prudentes.</p></div></article>
-            <article class="benefit-item"><span class="benefit-check"><svg class="icon"><use href="#i-x"/></svg></span><div><h4>Observabilidad distribuida</h4><p>Seguir una petición requiere registros correlacionados, métricas y trazas.</p></div></article>
-            <article class="benefit-item"><span class="benefit-check"><svg class="icon"><use href="#i-x"/></svg></span><div><h4>Transacciones complejas</h4><p>Coordinar cambios entre servicios requiere patrones como sagas o compensaciones.</p></div></article>
-            <article class="benefit-item"><span class="benefit-check"><svg class="icon"><use href="#i-x"/></svg></span><div><h4>Más esfuerzo operativo</h4><p>Seguridad, automatización y mantenimiento deben cubrir cada servicio.</p></div></article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section examples-section" id="ejemplos">
-      <div class="container">
-        <div class="section-heading">
-          <div><p class="eyebrow eyebrow-light"><span class="eyebrow-line"></span> LLEVÉMOSLO A CONTEXTOS CONOCIDOS</p><h2>¿Dónde podría <span class="text-gradient">aplicarse?</span></h2></div>
-          <p class="section-lede">Son posibilidades de diseño para aprender, no afirmaciones sobre la arquitectura interna de empresas reales.</p>
-        </div>
-        <div class="examples-grid">
-          <article class="example-card"><span class="example-icon example-purple"><svg class="icon"><use href="#i-bag"/></svg></span><span class="example-number">01 / COMERCIO</span><h3>Tienda en línea</h3><p>Catálogo, inventario, pedidos, pagos y entrega como capacidades que colaboran.</p><span class="example-flow">CATÁLOGO <i>→</i> PEDIDOS <i>→</i> PAGO</span></article>
-          <article class="example-card"><span class="example-icon example-blue"><svg class="icon"><use href="#i-graduation"/></svg></span><span class="example-number">02 / EDUCACIÓN</span><h3>Campus virtual</h3><p>Cursos, matrículas, evaluaciones y notificaciones podrían evolucionar a ritmos distintos.</p><span class="example-flow">CURSOS <i>→</i> MATRÍCULA <i>→</i> NOTAS</span></article>
-          <article class="example-card"><span class="example-icon example-green"><svg class="icon"><use href="#i-credit"/></svg></span><span class="example-number">03 / FINANZAS</span><h3>Aplicación bancaria</h3><p>Perfiles, transferencias, cuentas y alertas con controles estrictos y límites de confianza.</p><span class="example-flow">CUENTAS <i>→</i> TRANSFERENCIAS</span></article>
-          <article class="example-card"><span class="example-icon example-amber"><svg class="icon"><use href="#i-box"/></svg></span><span class="example-number">04 / VIAJES</span><h3>Plataforma de reservas</h3><p>Búsqueda, disponibilidad, reservas y confirmaciones trabajan sobre una misma experiencia.</p><span class="example-flow">BÚSQUEDA <i>→</i> RESERVA <i>→</i> AVISO</span></article>
-        </div>
-        <p class="disclaimer"><span>i</span> Son ejemplos ilustrativos de posibles diseños arquitectónicos. No todas las aplicaciones de estos sectores utilizan microservicios, ni necesariamente los necesitan.</p>
+        <div class="migration-card"><span class="migration-icon"><svg class="icon"><use href="#i-arrow"/></svg></span><div><span class="step-number">DECISIÓN CON CONTEXTO</span><h3>Empieza por las necesidades reales</h3><p>Un monolito modular puede ser una base práctica para un proyecto pequeño o mediano. Si el producto y el equipo crecen y aparecen necesidades concretas de despliegue o escalado independiente, se puede evaluar separar capacidades. La arquitectura debe resolver un problema, no añadir piezas por moda.</p></div></div>
       </div>
     </section>
 
     <section class="section video-section" id="video">
       <div class="container video-container">
-        <div class="video-copy"><p class="eyebrow"><span class="eyebrow-line"></span> REFUERZA LO APRENDIDO</p><h2>Aprende con<br><span class="gradient-text">el video.</span></h2><p>Un recorrido visual por la arquitectura desacoplada, sus componentes y los trade-offs de los microservicios.</p><div class="video-meta"><span><i></i> RECURSO AUDIOVISUAL</span><span id="video-duration">Duración: por configurar</span></div></div>
+        <div class="video-copy"><p class="eyebrow"><span class="eyebrow-line"></span> REFUERZA LO APRENDIDO</p><h2>Aprende con<br><span class="gradient-text">el video.</span></h2><p>Repasa cómo se integran los módulos de una aplicación monolítica, cómo se relacionan con los datos y qué aspectos considerar al elegir esta arquitectura.</p><div class="video-meta"><span><i></i> VIDEO EXPLICATIVO</span><span id="video-duration">Duración: por configurar</span></div></div>
         <div class="video-frame">
-          <video id="lesson-video" controls playsinline preload="metadata" aria-label="Video explicativo sobre arquitectura desacoplada" hidden></video>
-          <iframe id="lesson-youtube" title="Video explicativo sobre arquitectura desacoplada" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen hidden></iframe>
+          <video id="lesson-video" controls playsinline preload="metadata" aria-label="Video explicativo sobre arquitectura monolítica" hidden></video>
+          <iframe id="lesson-youtube" title="Video explicativo sobre arquitectura monolítica" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen hidden></iframe>
           <div class="video-placeholder" id="video-placeholder">
             <div class="placeholder-orbit orbit-a"></div><div class="placeholder-orbit orbit-b"></div>
-            <span class="placeholder-play"><svg class="icon"><use href="#i-play"/></svg></span>
-            <span class="placeholder-label">ESPACIO PARA EL VIDEO</span>
-            <p>Configura un MP4 o una URL de YouTube<br>para mostrar aquí el contenido real.</p>
-            <span class="placeholder-duration">VIDEO · DURACIÓN VARIABLE</span>
+            <span class="placeholder-play" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg></span>
+            <span class="placeholder-label">ESPACIO PREPARADO PARA EL VIDEO</span>
+            <p>Configura un archivo MP4 o una URL de YouTube<br>para mostrar el video real.</p>
+            <span class="placeholder-duration">NO HAY VIDEO CONFIGURADO</span>
           </div>
-          <div class="video-footer"><span><b>01</b> / ARQUITECTURA DESACOPLADA</span><span>LECCIÓN EN VIDEO <i>↗</i></span></div>
+          <div class="video-footer"><span><b>01</b> / ARQUITECTURA MONOLÍTICA</span><span>LECCIÓN EN VIDEO</span></div>
         </div>
       </div>
     </section>
 
     <section class="section quiz-section section-tint" id="quiz">
       <div class="container">
-        <div class="quiz-heading"><p class="eyebrow eyebrow-light"><span class="eyebrow-line"></span> COMPRUEBA LO QUE APRENDISTE</p><h2>Tu turno de <span class="text-gradient">conectar las ideas.</span></h2><p>10 preguntas, una a la vez. Tus respuestas correctas y explicaciones aparecen al finalizar.</p></div>
+        <div class="quiz-heading"><p class="eyebrow eyebrow-light"><span class="eyebrow-line"></span> COMPRUEBA LO QUE APRENDISTE</p><h2>Tu turno de <span class="text-gradient">integrar las ideas.</span></h2><p>10 preguntas, una a la vez. Tus respuestas y explicaciones se revelan al finalizar el intento.</p></div>
         <div class="quiz-shell" id="quiz-shell">
           <div class="quiz-top"><div><span class="quiz-label">EVALUACIÓN INTERACTIVA</span><div class="quiz-progress-text" id="quiz-progress-text" aria-live="polite">Pregunta 1 de 10</div></div><div class="progress-track" role="progressbar" aria-label="Progreso del cuestionario" aria-valuemin="1" aria-valuemax="10" aria-valuenow="1" id="progress-track"><span id="progress-fill"></span></div></div>
           <div id="quiz-stage">
             <div class="question-meta"><span id="question-level">BÁSICA · CONCEPTOS</span><span id="question-number">01 / 10</span></div>
-            <h3 class="question-title" id="question-title"></h3>
+            <h3 class="question-title" id="question-title" tabindex="-1"></h3>
             <div class="answer-list" id="answer-list" role="group" aria-labelledby="question-title"></div>
             <p class="quiz-feedback" id="quiz-feedback" aria-live="polite"></p>
-            <div class="quiz-controls"><button class="button button-quiet" id="quiz-prev" type="button">← Anterior</button><span class="quiz-hint">Selecciona una respuesta para continuar</span><button class="button button-dark" id="quiz-next" type="button">Siguiente <svg class="icon"><use href="#i-arrow"/></svg></button><button class="button button-primary" id="quiz-finish" type="button" hidden>Finalizar <svg class="icon"><use href="#i-check"/></svg></button></div>
+            <div class="quiz-controls"><button class="button button-quiet" id="quiz-prev" type="button">← Anterior</button><span class="quiz-hint">Puedes volver y cambiar tus respuestas</span><button class="button button-dark" id="quiz-next" type="button">Siguiente <svg class="icon"><use href="#i-arrow"/></svg></button><button class="button button-primary" id="quiz-finish" type="button" hidden>Finalizar cuestionario <svg class="icon"><use href="#i-check"/></svg></button></div>
           </div>
-          <div class="quiz-results" id="quiz-results" hidden></div>
+          <div class="quiz-summary" id="quiz-summary" hidden></div>
+          <div class="quiz-results" id="quiz-results" tabindex="-1" hidden></div>
         </div>
-        <p class="quiz-footnote"><svg class="icon"><use href="#i-check"/></svg> Puedes volver a preguntas anteriores y cambiar tus respuestas antes de finalizar.</p>
+        <p class="quiz-footnote"><svg class="icon"><use href="#i-check"/></svg> Las respuestas quedan guardadas mientras avanzas entre preguntas.</p>
       </div>
     </section>
 
     <section class="section conclusion-section" id="conclusiones">
       <div class="container conclusion-grid">
-        <div><p class="eyebrow eyebrow-light"><span class="eyebrow-line"></span> PARA CERRAR</p><h2>La arquitectura correcta<br>es la que <span class="text-gradient">sirve al proyecto.</span></h2><a class="button button-primary" href="#inicio">Volver al inicio <svg class="icon"><use href="#i-arrow"/></svg></a></div>
+        <div><p class="eyebrow eyebrow-light"><span class="eyebrow-line"></span> PARA CERRAR</p><h2>La arquitectura correcta<br>es la que <span class="text-gradient">sirve al proyecto.</span></h2><div class="conclusion-actions"><a class="button button-primary" href="#inicio">Volver al inicio <svg class="icon"><use href="#i-arrow"/></svg></a><a class="button button-outline conclusion-quiz-link" href="#quiz"><svg class="icon"><use href="#i-graduation"/></svg> Realizar el cuestionario</a></div></div>
         <div class="conclusion-points">
-          <p><span>01</span> Desacoplar es reducir dependencias para que los componentes evolucionen con mayor libertad.</p>
-          <p><span>02</span> Los microservicios delimitan responsabilidades y se comunican mediante interfaces diseñadas.</p>
-          <p><span>03</span> La red falla: contratos, observabilidad y resiliencia son parte del diseño.</p>
-          <p><span>04</span> La autonomía trae beneficios y también más complejidad operativa.</p>
-          <p><span>05</span> El contexto del producto y del equipo guía la elección arquitectónica.</p>
+          <p><span>01</span> El monolito integra las funcionalidades principales en una aplicación.</p>
+          <p><span>02</span> Puede organizarse internamente en módulos bien definidos.</p>
+          <p><span>03</span> Suele simplificar el desarrollo y el despliegue inicial.</p>
+          <p><span>04</span> Si crece sin límites claros, puede aumentar la complejidad de mantenimiento.</p>
+          <p><span>05</span> Su conveniencia depende de las necesidades y de la calidad del diseño.</p>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer"><div class="container footer-inner"><a class="brand" href="#inicio"><span class="brand-mark"><svg class="icon"><use href="#i-network"/></svg></span><span>ARQ<span class="brand-dot">.</span>LAB</span></a><p>Una guía para aprender arquitectura de software, pieza a pieza.</p><a href="#inicio">Volver arriba ↑</a></div></footer>
+  <footer class="site-footer"><div class="container footer-inner"><a class="brand" href="#inicio"><span class="brand-mark"><svg class="icon"><use href="#i-cube"/></svg></span><span>ARQ<span class="brand-dot">.</span>LAB</span></a><p>Una guía para aprender arquitectura de software, pieza a pieza.</p><a href="#inicio">Volver arriba ↑</a></div></footer>
   <script src="script.js" defer></script>
 </body>
 </html>
