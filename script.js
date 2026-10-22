@@ -2,6 +2,7 @@
 const VIDEO_CONFIG = {
   mp4Path: "",
   youtubeUrl: "",
+  googleDriveUrl: "https://drive.google.com/drive/folders/1zbk9N1hHwFxTRvRR6Fmu1c2qKjjKW9iv?usp=sharing",
 };
 
 const moduleDetails = {
@@ -217,6 +218,35 @@ function getYouTubeEmbedUrl(value) {
   }
 }
 
+function getGoogleDriveEmbed(value) {
+  try {
+    const url = new URL(value);
+    if (url.hostname !== "drive.google.com") return null;
+
+    const folderId = url.pathname.match(/^\/drive\/folders\/([^/]+)/)?.[1];
+    if (folderId) {
+      return {
+        url: `https://drive.google.com/embeddedfolderview?id=${encodeURIComponent(folderId)}#grid`,
+        title: "Videos compartidos en Google Drive",
+        label: "Carpeta de video interactiva",
+      };
+    }
+
+    const fileId = url.pathname.match(/^\/file\/d\/([^/]+)/)?.[1];
+    if (fileId) {
+      return {
+        url: `https://drive.google.com/file/d/${encodeURIComponent(fileId)}/preview`,
+        title: "Video explicativo en Google Drive",
+        label: "Video en Google Drive",
+      };
+    }
+
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 if (VIDEO_CONFIG.mp4Path.trim()) {
   videoElement.src = VIDEO_CONFIG.mp4Path.trim();
   videoElement.hidden = false;
@@ -240,6 +270,21 @@ if (VIDEO_CONFIG.mp4Path.trim()) {
   } else {
     videoDuration.textContent = "URL de YouTube no válida";
     console.error("Configura una URL válida de YouTube en VIDEO_CONFIG.youtubeUrl.");
+  }
+} else if (VIDEO_CONFIG.googleDriveUrl.trim()) {
+  const driveEmbed = getGoogleDriveEmbed(VIDEO_CONFIG.googleDriveUrl.trim());
+  if (driveEmbed) {
+    youtubeFrame.src = driveEmbed.url;
+    youtubeFrame.title = driveEmbed.title;
+    youtubeFrame.hidden = false;
+    videoPlaceholder.hidden = true;
+    videoDuration.textContent = driveEmbed.label;
+    const driveLink = document.querySelector("#video-drive-link");
+    driveLink.href = VIDEO_CONFIG.googleDriveUrl.trim();
+    driveLink.hidden = false;
+  } else {
+    videoDuration.textContent = "Enlace de Google Drive no válido";
+    console.error("Configura un enlace válido a una carpeta o archivo de Google Drive.");
   }
 }
 

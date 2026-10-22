@@ -20,7 +20,8 @@ Edita `VIDEO_CONFIG`, al inicio de `script.js`, y utiliza una de estas opciones:
 const VIDEO_CONFIG = {
   mp4Path: "video/arquitectura-monolitica.mp4",
   youtubeUrl: "",
+  googleDriveUrl: "",
 };
 ```
 
-Para un video local, copia el archivo MP4 dentro de la carpeta `video/` y asigna su ruta relativa a `mp4Path`. Para YouTube, deja `mp4Path` vacío y coloca una URL válida de YouTube en `youtubeUrl`. Si ambas opciones tienen valor, el MP4 tiene prioridad. Sin una fuente configurada se muestra un espacio preparado, no un video ficticio. El MP4 utiliza controles nativos y muestra su duración al cargar metadatos; YouTube incorpora sus propios controles.
+Para un video local, copia el archivo MP4 dentro de la carpeta `video/` y asigna su ruta relativa a `mp4Path`. Para YouTube, deja `mp4Path` vacío y coloca una URL válida de YouTube en `youtubeUrl`. Para Google Drive, deja las dos anteriores vacías y usa el enlace compartido de una carpeta o de un archivo en `googleDriveUrl`. Las carpetas se muestran como una vista navegable; los archivos se abren en el reproductor integrado de Drive. El MP4 tiene prioridad, luego YouTube y después Drive. Los archivos y carpetas de Drive deben permitir el acceso a las personas que visiten la página. Sin una fuente configurada se muestra un espacio preparado, no un video ficticio.
